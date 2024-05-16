@@ -1,4 +1,7 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmRole } from 'src/role/infrastructure/persistence/typeorm/TypeOrmRole';
+import { TypeOrmStatus } from 'src/status/infrastructure/persistence/typeorm/TypeOrmStatus';
+import { TypeOrmSocialProfile } from 'src/user/infrastructure/persistence/typeorm/TypeOrmSocialProfile';
 import { TypeOrmUser } from 'src/user/infrastructure/persistence/typeorm/TypeOrmUser';
 
 export class PostgresTypeOrmClient {
@@ -11,6 +14,7 @@ export class PostgresTypeOrmClient {
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       synchronize: true,
+      autoLoadEntities: true,
       ssl: process.env.DATABASE_SSL === 'true',
       extra: {
         ssl:
@@ -20,7 +24,7 @@ export class PostgresTypeOrmClient {
               }
             : null,
       },
-      entities: [TypeOrmUser],
+      entities: [TypeOrmUser, TypeOrmStatus, TypeOrmRole, TypeOrmSocialProfile],
     });
   }
 }

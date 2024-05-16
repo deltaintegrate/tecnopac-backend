@@ -6,7 +6,7 @@ export abstract class UserRepository {
   abstract save(user: User): Promise<User>;
   abstract getAll(pageOptionsDto: PageOptionsDto): Promise<PageDto<User[]>>;
   abstract deleteAll(): Promise<boolean>;
-  abstract deleteOne(): Promise<boolean>;
+  abstract deleteOne(id: number): Promise<boolean>;
   abstract updateOne(): Promise<User>;
   abstract archiveAll(): Promise<boolean>;
   abstract archiveOne(): Promise<boolean>;

@@ -9,22 +9,19 @@ import { UserRepository } from 'src/user/domain/UserRepository';
 export class TypeOrmUserRepository implements UserRepository {
   constructor(private readonly service: UserService) {}
   deleteAll(): Promise<boolean> {
-    throw new Error('Method not implemented.');
-  }
-  deleteOne(): Promise<boolean> {
-    throw new Error('Method not implemented.');
+    return this.service.deleteAllUser();
   }
   updateOne(): Promise<User> {
     throw new Error('Method not implemented.');
   }
   archiveAll(): Promise<boolean> {
-    throw new Error('Method not implemented.');
+    return this.service.archiveAllUser();
   }
   archiveOne(): Promise<boolean> {
     throw new Error('Method not implemented.');
   }
   suspendAll(): Promise<boolean> {
-    throw new Error('Method not implemented.');
+    return this.service.suspendAllUser();
   }
   suspendOne(): Promise<boolean> {
     throw new Error('Method not implemented.');
@@ -37,18 +34,8 @@ export class TypeOrmUserRepository implements UserRepository {
   getAll(pageOptionsDto: PageOptionsDto): Promise<PageDto<User[]>> {
     return this.service.findAll(pageOptionsDto);
   }
-  /*
 
-  getOneById(id: string): Promise<User> {
-    return this.service.findOneById(id);
+  deleteOne(id: number): Promise<boolean> {
+    return this.service.deleteOne(id);
   }
-
-  getOneByPhone(phone: string): Promise<User> {
-    return this.service.findOneByPhone(phone);
-  }
-
-  delete(id: string): Promise<void> {
-    return this.service.delete(id);
-  }
-  */
 }

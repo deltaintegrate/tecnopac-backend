@@ -1,4 +1,8 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsArray, IsBoolean, IsNotEmpty, IsString } from 'class-validator';
+import { IRoleClass } from './RoleClassDto';
+import { IStatusClass } from './StatusClassDto';
+import { ISocialProfileClass } from './SocialProfileClassDto';
 
 export class SocialProfile {
   @IsNotEmpty()
@@ -11,27 +15,33 @@ export class SocialProfile {
 }
 
 export class IUserClass {
-  id?: string;
+  id?: number;
 
   @IsNotEmpty()
   @IsString()
   name: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  role: number;
+  @Type(() => IRoleClass)
+  role: IRoleClass;
 
   @IsNotEmpty()
-  @IsNumber()
-  status: number;
+  @Type(() => IStatusClass)
+  status: IStatusClass;
 
-  @IsNumber()
   @IsNotEmpty()
-  socialProfile: number;
+  @IsArray()
+  socialProfiles: ISocialProfileClass[];
 
   @IsBoolean()
   @IsNotEmpty()
   promote_status: boolean;
+
+  is_deleted?: boolean;
+
+  is_suspend?: boolean;
+
+  is_archive?: boolean;
 
   @IsNotEmpty()
   @IsString()
