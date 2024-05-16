@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { IUserUpdateClass } from 'src/core/domain/dto/UserUpdateClassDto';
 import { PageDto } from 'src/core/domain/utils/PageDto';
 import { PageOptionsDto } from 'src/core/domain/utils/PageOptionsDto';
 import { UserService } from 'src/user/application/user.service';
@@ -11,8 +12,8 @@ export class TypeOrmUserRepository implements UserRepository {
   deleteAll(): Promise<boolean> {
     return this.service.deleteAllUser();
   }
-  updateOne(): Promise<User> {
-    throw new Error('Method not implemented.');
+  updateOne(id: number, createUserDto: IUserUpdateClass): Promise<User> {
+    return this.service.updateOneUser(id, createUserDto);
   }
   archiveAll(): Promise<boolean> {
     return this.service.archiveAllUser();

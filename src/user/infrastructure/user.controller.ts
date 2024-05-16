@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { GetAllUsers } from '../application/get-all-users/GetAllUser';
 import { IUserClass } from 'src/core/domain/dto/UserClassDto';
@@ -8,6 +16,8 @@ import { DeleteOneUser } from '../application/delete-user/DeleteUser';
 import { DeleteAllUser } from '../application/delete-all-users/DeleteAllUser';
 import { ArchiveAllUser } from '../application/archive-all-all/ArchiceAllUser';
 import { SuspendAllUser } from '../application/suspend-all-user/ArchiceAllUser';
+import { UpdateOneUser } from '../application/update-user/UpdateUser';
+import { IUserUpdateClass } from 'src/core/domain/dto/UserUpdateClassDto';
 
 @ApiTags('user')
 @Controller('user')
@@ -19,6 +29,7 @@ export class UserController {
     private readonly deleteAllUser: DeleteAllUser,
     private readonly archiveAll: ArchiveAllUser,
     private readonly suspendAll: SuspendAllUser,
+    private readonly updateOneUser: UpdateOneUser,
   ) {}
 
   @Post()
@@ -38,6 +49,18 @@ export class UserController {
   @ApiOkResponse({ type: [IUserClass] })
   findAll(@Query() pageOptionsDto: PageOptionsDto): Promise<IUserClass[]> {
     return this.getAllUsers.execute(pageOptionsDto);
+  }
+
+  @Put()
+  @ApiCreatedResponse({
+    description: 'Update One users',
+  })
+  @ApiOkResponse({ type: [IUserUpdateClass] })
+  updateOne(
+    @Query() id: number,
+    @Body() createUserDto: IUserUpdateClass,
+  ): Promise<IUserClass[]> {
+    return this.updateOneUser.execute(id, createUserDto);
   }
 
   @Delete()

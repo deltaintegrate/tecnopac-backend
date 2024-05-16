@@ -12,6 +12,7 @@ import { DeleteOneUser } from '../application/delete-user/DeleteUser';
 import { DeleteAllUser } from '../application/delete-all-users/DeleteAllUser';
 import { ArchiveAllUser } from '../application/archive-all-all/ArchiceAllUser';
 import { SuspendAllUser } from '../application/suspend-all-user/ArchiceAllUser';
+import { UpdateOneUser } from '../application/update-user/UpdateUser';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TypeOrmUser, TypeOrmSocialProfile])],
@@ -25,6 +26,7 @@ import { SuspendAllUser } from '../application/suspend-all-user/ArchiceAllUser';
     DeleteAllUser,
     ArchiveAllUser,
     SuspendAllUser,
+    UpdateOneUser,
   ],
 })
 export class UserModule {}
